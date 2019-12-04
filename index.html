@@ -3,15 +3,21 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="google-signin-scope" content="profile email"><!-- Google Sign In -->
+  <meta name="google-signin-client_id" content="889189468371-75ps5j0rk5791h0m308umj2iqesi23ob.apps.googleusercontent.com"><!-- Google Sin In -->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="main.css">
   <script src="/socket.io/socket.io.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script> <!-- Google Sign In -->
 </head>
 
 <body>
+
+
   First name: <input type="text" name='username' id="username"><br>
   Last name: <input type="password" name='password' id="password"><br>
-  <button id="your-id"><sub></sub>Submit</button>
+  <button id="your-id">Submit</button>
+  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div><!-- Google Sign In -->
 
   <div id='token'></div>
   <br>
@@ -21,9 +27,35 @@
   <br>
   <div class="chat"></div>
   <br>
+  <div class="tokenStripe"></div>
+  <br>
+
+    Stripe
+  <form action="http://localhost:3000/" id="payment-form" enctype="application/x-www-form-urlencoded" method="post" >
+    <span class="payment-errors"></span>
+    <label>Card Number</label>
+    <input type="text" size="20" data-stripe="number">
+    <label>Expiration (MM/YY)</label>
+    <input type="text" size="2" data-stripe="exp_month">
+    <input type="text" size="2" data-stripe="exp_year">
+    <label>CVC</label>
+    <input type="text" size="4" data-stripe="cvc">
+    <input type="submit" class="submit" value="Submit">
+  </form>
+
+  <!--  Stripe-->
+  <!--<script src="https://checkout.stripe.com/checkout.js" defer></script>-->
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script type="text/javascript">
+    // const stripePublicKey = 'pk_test_Gl8PrFwtu0WYkPyhha5y7AOH005IhJiM5M';
+    Stripe.setPublishableKey('pk_test_Gl8PrFwtu0WYkPyhha5y7AOH005IhJiM5M');
+  </script>
 
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="main.js"></script>
+  <script src="stripe.js"></script>
+  <script src="googleSignin.js"></script>
+
 </body>
 
 </html>
